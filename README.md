@@ -10,6 +10,12 @@ usage: flash-cli -i         initialize the project.
                  -docs      open the flash asdocs.
 ``` 
 
+Don't forget to add...
+
+``` 
+export FLEX_HOME = "YOUR_FLEX"        # and 
+export FLEX_BIN  = "$FLEX_HOME/bin"
+```
 
 for components
 =========

@@ -19,6 +19,15 @@ export FLEX_HOME = "YOUR_FLEX"        # and
 export FLEX_BIN  = "$FLEX_HOME/bin"
 ```
 
+install
+=========
+
+just copy on clean folder...
+
+```
+curl https://raw.github.com/diasbruno/flash-cli/master/installer.sh | sh
+```
+
 for components
 =========
 

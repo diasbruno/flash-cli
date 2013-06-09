@@ -4,3 +4,5 @@ rm flash-cli.zip
 
 mv flash-cli-master/* .
 rm -rf flash-cli-master
+
+rm installer.sh

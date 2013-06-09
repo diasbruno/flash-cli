@@ -8,7 +8,7 @@ usage: ./flash-cli -i         initialize the project.
                    -c [task]  build component (task name is optional).
                    -t [task]  build and run tests (task name is optional).
                    -docs      open the flash asdocs.
-                   -ut        gets the ut.zip, with flexunit and many others,
+                   -ut        gets the build/ut.zip, with flexunit and many others,
                               and put them in the libs folder.
 ``` 
 

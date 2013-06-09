@@ -44,7 +44,11 @@
             
             <!-- Include the source paths for this project. -->
             <source-path path-element="${project.src}"   />
-            <source-path path-element="${AS3Utils}"      />
+
+            <!-- include everything from the libs path. -->
+            <library-path dir="${project.libs}">
+                <include name="*.swc" />
+            </library-path>
 
             <!-- [trace], ... on Apache fdb (Flash Player Debugger) -->
             <verbose-stacktraces>true</verbose-stacktraces>

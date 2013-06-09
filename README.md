@@ -26,6 +26,7 @@ while you're developing a component for our project, you'll just need
 
 ```
 ./flash-cli -i
+./flash-cli -ut  # add flexunit to the libs folder.
 ./flash-cli -c 
 ./flash-cli -t 
 ```

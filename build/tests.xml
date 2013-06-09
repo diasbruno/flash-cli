@@ -47,7 +47,6 @@
     <!-- TASK -->
     <target depends="compile"
             name="run">
-        <echo>${project.tests.reports}</echo>
         <flexunit swf="${project.tests.app}"
                   toDir="${project.tests.reports}"
                   haltonfailure="false"

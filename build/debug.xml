@@ -19,7 +19,8 @@
 
     <taskdef resource="flexTasks.tasks" 
              classpath="${flex.ant.tasks}"/> 
-	
+
+    <!-- TASK -->
     <target name="compile">
 
         <!-- Runs mxmlc -->
@@ -44,11 +45,10 @@
         </mxmlc>
         
     </target>
-<!-- -->
-    <target name="run_adl">
-
-        <exec executable="adl"> 
-            <arg line="-runtime '${FLEX_HOME}/runtimes/air/mac/' -profile extendedDesktop ${project.air.descriptorDebug}" />
+    <!-- TASK -->
+    <target name="run">
+        <exec executable="open"> 
+            <arg line="-a 'Flash Player Debugger' ${project.debug.app}" />
 		</exec>
     </target>
 	

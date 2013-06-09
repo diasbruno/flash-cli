@@ -1,4 +1,4 @@
-flash-cli
+flash-cli {osx}
 =========
 
 ```

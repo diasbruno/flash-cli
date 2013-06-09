@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project name="flash-cli (Tests)" 
+	     basedir=".."
+         default="compile">
+	
+	<description>
+		Ant configurations for flash-cli.
+		Copyright 2011-2013 (c) Bruno Dias.
+	</description>
+	
+	<!-- load shell environment -->
+    <property environment="ENV" />
+	
+    <!-- load property files -->
+	<property file="build/flex.properties"  />
+	<property file="build/air.properties"   />
+	<property file="build/tests.properties" />
+    <property file="libraries.properties"   />
+    <property file="project.properties"     />
+
+    <taskdef resource="flexTasks.tasks" 
+             classpath="${flex.ant.tasks}"/> 
+
+    <taskdef resource="flexUnitTasks.tasks" 
+             classpath="${flex.unit.tasks}"/> 
+	
+    <!-- TASK -->
+    <target name="compile">
+        <mxmlc file="${project.apptests}" 
+        	   output="${project.tests.app}" 
+        	   debug="true" 
+        	   target-player="${project.player}">
+
+        	<!-- Load air configurations. -->
+            <load-config filename="${air.configuration}" />
+            
+            <!-- include everything from the libs path. -->
+            <library-path dir="${project.libs}">
+                <include name="*.swc" />
+            </library-path>
+
+            <!-- [trace], ... on Apache fdb (Flash Player Debugger) -->
+            <verbose-stacktraces>true</verbose-stacktraces>
+        </mxmlc>
+    </target>
+
+    <!-- TASK -->
+    <target depends="compile"
+            name="run">
+        <echo>${project.tests.reports}</echo>
+        <flexunit swf="${project.tests.app}"
+                  toDir="${project.tests.reports}"
+                  haltonfailure="false"
+                  verbose="true"
+                  localTrusted="true" />
+    </target>
+	
+</project>

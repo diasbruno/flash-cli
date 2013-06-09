@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project name="flash-cli (Component)" 
+	     basedir=".."
+         default="compile">
+	
+	<description>
+		Ant configurations for flash-cli.
+		Copyright 2011-2013 (c) Bruno Dias.
+	</description>
+	
+	<!-- load shell environment -->
+    <property environment="ENV" />
+	
+    <!-- load property files -->
+	<property file="build/flex.properties"  />
+	<property file="build/air.properties"   />
+	<property file="build/tests.properties" />
+    <property file="libraries.properties"   />
+    <property file="project.properties"     />
+
+    <taskdef resource="flexTasks.tasks" 
+             classpath="${flex.ant.tasks}"/> 
+
+    <!-- TASK -->
+	<target name="no_changes">
+		<uptodate property="compile.not-required"
+				  targetfile="${bin.loc}/${build.artifact}.swc">
+			<srcresources>
+				<fileset dir="${project.src}">
+					<include name="**/*.as" />
+					<include name="**/*.mxml" />
+				</fileset>
+				<fileset dir="${project.libs}">
+					<include name="**/*.swc" />
+				</fileset>
+			</srcresources>
+		</uptodate>
+
+	</target>
+    <!-- TASK -->
+    <target depends="no_changes"
+            name="compile">
+        <compc output="${project.lib.swc}" 
+        	   target-player="${project.player}">
+
+        	<!-- Load air configurations.
+            <load-config filename="${air.configuration}" />
+            -->
+            
+			<source-path path-element="${project.src}" />
+
+			<include-sources dir="${project.src}">
+				<include name="**/*.as" />
+				<include name="**/*.mxml" />
+			</include-sources>
+
+            <!-- include everything from the libs path. -->
+            <library-path dir="${project.libs}">
+                <include name="*.swc" />
+            </library-path>
+
+            <!-- [trace], ... on Apache fdb (Flash Player Debugger) -->
+            <verbose-stacktraces>true</verbose-stacktraces>
+        </compc>
+    </target>
+	
+</project>

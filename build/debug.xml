@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project name="flash-cli (Debug)" 
+	     basedir=".."
+         default="compile">
+	
+	<description>
+		Ant configurations for flash-cli.
+		Copyright 2011-2013 (c) Bruno Dias.
+	</description>
+	
+	<!-- load shell environment -->
+    <property environment="ENV" />
+	
+    <!-- load property files -->
+	<property file="build/flex.properties"      />
+	<property file="build/air.properties"       />
+    <property file="libraries.properties" />
+    <property file="project.properties"   />
+
+    <taskdef resource="flexTasks.tasks" 
+             classpath="${flex.ant.tasks}"/> 
+	
+    <target name="compile">
+
+        <!-- Runs mxmlc -->
+        <mxmlc file="${project.app}" 
+        	   output="${project.debug.app}" 
+        	   debug="true" 
+        	   target-player="${project.player}">
+
+        	<!-- Load air configurations. -->
+            <load-config filename="${air.configuration}" />
+            
+            <!-- Include the source paths for this project. -->
+            <source-path path-element="${project.src}"   />
+
+            <!-- [trace], ... on Apache fdb (Flash Player Debugger) -->
+            <verbose-stacktraces>true</verbose-stacktraces>
+        </mxmlc>
+        
+    </target>
+<!-- -->
+    <target name="run_adl">
+
+        <exec executable="adl"> 
+            <arg line="-runtime '${FLEX_HOME}/runtimes/air/mac/' -profile extendedDesktop ${project.air.descriptorDebug}" />
+		</exec>
+    </target>
+	
+</project>

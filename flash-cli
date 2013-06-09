@@ -1,0 +1,67 @@
+#!/usr/bin/env bash
+
+COMPILE=""
+TARGETS=""
+
+function findCommand {
+	case $1 in
+    	"-i" ) mkdir -p ./{debug,release,src,libs,tests};
+               mkdir -p tests/reports;
+               exit
+        	;;
+    	"-d" ) COMPILE="debug"
+        	;;
+    	"-r" ) COMPILE="release"
+        	;;
+    	"-c" ) COMPILE="component"
+        	;;
+    	"-t" ) COMPILE="tests"
+        	;;
+    	"-ut" ) cp build/ut.zip libs; cd libs; tar -zxf ut.zip; rm ut.zip;
+                exit
+        	;;
+        "-docs" ) open -a "Safari" "http://help.adobe.com/en_US/FlashPlatform/reference/actionscript/3/index.html"
+                 exit
+            ;;
+    	* ) invalidCommand
+	esac
+}
+
+function invalidCommand {
+	echo "WAT?"
+	usage
+	exit
+}
+
+function usage {
+	echo "usage: ./flash-cli -d [task]  build debug version (task name is optional)."
+	echo "                   -r [task]  build release version (task name is optional)."
+	echo "                   -c [task]  build component (task name is optional)."
+	echo "                   -t [task]  build and run tests (task name is optional)."
+	echo "                   -docs      open the flash asdocs."
+}
+
+if [ $# -gt 0 ]; then
+
+	if [ -n $1 ]; then
+
+		findCommand $1
+		counter=0
+		for T in $*; do
+			counter=$((counter + 1))
+			if [ $counter -gt 1 ]; then
+				TARGETS="$TARGETS $T"
+			fi
+		done
+
+		echo $TARGETS
+
+		if [ ! $COMPILE = "" ]; then
+			ant -f build/$COMPILE.xml $TARGETS
+		fi
+	fi
+
+else
+    usage
+    exit
+fi

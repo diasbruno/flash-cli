@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project name="ModernCommandLineFlashBuilderProject" 
+	     basedir="..">
+	
+	<description>
+		MCLFBP 
+		- Modern Command Line (Adobe/Apache) Fl Builder Project
+
+		Before you start writing stuff, 
+		you need to configure all *.properties files 
+		with your work directories.
+		
+		@see flex.properties
+		@see air.properties
+		@see libraries.properties
+		@see project.properties
+
+		Ant configurations for a Modern Command Line Flash Build Project.
+		Copyright 2011-2013 (c) Bruno Dias.
+	</description>
+	
+	<!-- load shell environment -->
+    <property environment="ENV" />
+	
+    <!-- load property files -->
+	<property file="build/flex.properties"      />
+	<property file="build/air.properties"       />
+    <property file="build/libraries.properties" />
+    <property file="build/project.properties"   />
+
+    <taskdef resource="flexTasks.tasks" classpath="${flex.ant.tasks}"/> 
+	
+    <target name="debug_compile">
+
+        <mxmlc file="${project.app}" 
+        	   output="${project.debug.app}" 
+        	   debug="true" 
+        	   target-player="${project.player}">
+
+        	<!-- Load air configurations. -->
+            <load-config filename="${air.configuration}" />
+            
+            <!-- Include the source paths for this project. -->
+            <source-path path-element="${project.src}" />
+            <source-path path-element="${AS3Utils}" />
+
+            <!-- [trace], ... on Apache fdb (Flash Player Debugger) -->
+            <verbose-stacktraces>true</verbose-stacktraces>
+        </mxmlc>
+    </target>
+<!-- -->
+    <target name="debug_run_adl">
+
+        <exec executable="adl"> 
+            <arg line="-runtime '${FLEX_HOME}/runtimes/air/mac/' -profile extendedDesktop ${project.air.descriptorDebug}" />
+		</exec>
+    </target>
+<!-- -->
+	<target name="release_compile">
+        <mxmlc file="${project.app}" 
+        	   output="${project.debug.app}" 
+        	   debug="false" 
+        	   target-player="${project.player}">
+
+        	<!-- Load air configurations. -->
+            <load-config filename="${FLEX_HOME}/frameworks/air-config.xml"/>
+            
+            <!-- Include the source paths for this project. -->
+            <source-path path-element="${project.src}" />
+            <source-path path-element="${AS3Utils}" />
+            
+            <verbose-stacktraces>false</verbose-stacktraces>
+        </mxmlc>
+    </target>
+	
+</project>

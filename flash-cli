@@ -34,7 +34,8 @@ function invalidCommand {
 }
 
 function usage {
-	echo "usage: ./flash-cli -d [task]  build debug version (task name is optional)."
+	echo "usage: ./flash-cli -i         initialize the project."
+	echo "                   -d [task]  build debug version (task name is optional)."
 	echo "                   -r [task]  build release version (task name is optional)."
 	echo "                   -c [task]  build component (task name is optional)."
 	echo "                   -t [task]  build and run tests (task name is optional)."

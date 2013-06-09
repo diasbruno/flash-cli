@@ -40,6 +40,8 @@ function usage {
 	echo "                   -c [task]  build component (task name is optional)."
 	echo "                   -t [task]  build and run tests (task name is optional)."
 	echo "                   -docs      open the flash asdocs."
+	echo "                   -ut        gets the ut.zip, with flexunit and many others,"
+    echo "                              and put them in the libs folder."
 }
 
 if [ $# -gt 0 ]; then

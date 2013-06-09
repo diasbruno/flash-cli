@@ -2,12 +2,14 @@ flash-cli
 =========
 
 ```
-usage: flash-cli -i         initialize the project.
-                 -d [task]  build debug version (task name is optional).
-                 -r [task]  build release version (task name is optional).
-                 -c [task]  build component (task name is optional).
-                 -t [task]  build and run tests (task name is optional).
-                 -docs      open the flash asdocs.
+usage: ./flash-cli -i         initialize the project.
+                   -d [task]  build debug version (task name is optional).
+                   -r [task]  build release version (task name is optional).
+                   -c [task]  build component (task name is optional).
+                   -t [task]  build and run tests (task name is optional).
+                   -docs      open the flash asdocs.
+                   -ut        gets the ut.zip, with flexunit and many others,
+                              and put them in the libs folder.
 ``` 
 
 Don't forget to add...

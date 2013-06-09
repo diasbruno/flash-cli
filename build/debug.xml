@@ -46,7 +46,8 @@
         
     </target>
     <!-- TASK -->
-    <target name="run">
+    <target depends="compile"
+            name="run">
         <exec executable="open"> 
             <arg line="-a 'Flash Player Debugger' ${project.debug.app}" />
 		</exec>

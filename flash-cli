@@ -5,9 +5,12 @@ TARGETS=""
 
 function findCommand {
 	case $1 in
-    	"-i" ) mkdir -p ./{debug,release,src,libs,tests};
-               mkdir -p tests/reports;
-               exit
+    	"-ip" ) mkdir -p ./{debug,release,src,libs};
+                exit
+        	;;
+    	"-ic" ) mkdir -p ./{src,libs,tests};
+                mkdir -p tests/reports;
+                exit
         	;;
     	"-d" ) COMPILE="debug"
         	;;

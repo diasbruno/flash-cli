@@ -22,8 +22,6 @@
 
     <!-- TASK -->
     <target name="compile">
-
-        <!-- Runs mxmlc -->
         <mxmlc file="${project.app}" 
         	   output="${project.debug.app}" 
         	   debug="true" 
@@ -35,7 +33,7 @@
             <incremental>true</incremental>
             
             <!-- Include the source paths for this project. -->
-            <source-path path-element="${project.src}"   />
+            <source-path path-element="${project.src}" />
 
             <!-- include everything from the libs path. -->
             <library-path dir="${project.libs}">
@@ -45,14 +43,12 @@
             <!-- [trace], ... on Apache fdb (Flash Player Debugger) -->
             <verbose-stacktraces>true</verbose-stacktraces>
         </mxmlc>
-        
     </target>
+
     <!-- TASK -->
     <target depends="compile"
             name="run">
-        <exec executable="open"> 
-            <arg line="-a 'Flash Player Debugger' ${project.debug.app}" />
-		</exec>
+        <exec executable="fdb"><arg line="${project.reports}" /></exec>
     </target>
 	
 </project>

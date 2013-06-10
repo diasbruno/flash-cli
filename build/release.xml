@@ -4,18 +4,7 @@
          default="compile">
 	
 	<description>
-        flash-cli 
-
-		Before you start writing stuff, 
-		you need to configure all *.properties files 
-		with your work directories.
-		
-		@see flex.properties
-		@see air.properties
-		@see libraries.properties
-		@see project.properties
-
-		Ant configurations for a Modern Command Line Flash Build Project.
+		Ant configurations for flash-cli.
 		Copyright 2011-2013 (c) Bruno Dias.
 	</description>
 	
@@ -58,12 +47,11 @@
         </mxmlc>
         
     </target>
+
     <!-- TASK -->
     <target depends="compile"
             name="run">
-        <exec executable="open"> 
-            <arg line="-a 'Flash Player Debugger' ${project.debug.app}" />
-		</exec>
+        <exec executable="fdb"><arg line="${project.release.app}" /></exec>
     </target>
 	
 </project>

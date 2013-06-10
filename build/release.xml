@@ -43,6 +43,8 @@
         	<!-- Load air configurations. -->
             <load-config filename="${air.configuration}" />
             
+            <incremental>true</incremental>
+
             <!-- Include the source paths for this project. -->
             <source-path path-element="${project.src}"   />
 

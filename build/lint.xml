@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project name="flash-cli (Lint)" 
+	     basedir=".."
+         default="lint">
+	
+	<description>
+		Ant configurations for flash-cli.
+		Copyright 2011-2013 (c) Bruno Dias.
+	</description>
+	
+	<!-- load shell environment -->
+    <property environment="ENV" />
+	
+    <!-- load property files -->
+    <property file="libraries.properties"  />
+    <property file="project.properties"    />
+
+    <!-- FlexPMD -->
+    <path id="flexpmd.base">
+        <pathelement location="build/tests/as3-parser-1.1.jar" />
+        <pathelement location="build/tests/as3-parser-api-1.1.jar" />
+        <pathelement location="build/tests/as3-plugin-utils-1.1.jar" />
+        <pathelement location="build/tests/flex-pmd-files-1.1.jar" />
+        <pathelement location="build/tests/pmd-4.2.5.jar" />
+    </path>
+
+    <!-- Define pmd -->
+    <taskdef name="pmd" classname="com.adobe.ac.pmd.ant.FlexPmdAntTask" classpath="build/tests/flex-pmd-ant-task-1.1.jar">
+        <classpath>
+            <path refid="flexpmd.base" />
+            <pathelement location="build/tests/commons-lang-2.4.jar" />
+            <pathelement location="build/tests/flex-pmd-core-1.1.jar" />
+            <pathelement location="build/tests/flex-pmd-ruleset-api-1.1.jar" />
+            <pathelement location="build/tests/flex-pmd-ruleset-1.1.jar" />
+            <pathelement location="build/tests/plexus-utils-1.0.2.jar" />
+        </classpath>
+    </taskdef>
+
+    <!-- Define cpd -->
+    <taskdef name="cpd" 
+             classname="com.adobe.ac.cpd.ant.FlexCpdAntTask" 
+             classpath="build/tests/flex-pmd-cpd-ant-task-1.1.jar">
+        <classpath>
+            <path refid="flexpmd.base" />
+            <pathelement location="build/tests/flex-pmd-cpd-1.1.jar" />
+        </classpath>
+    </taskdef>
+
+    <!-- TASK -->
+    <target name="lint">
+        <script language="javascript">
+            var logger = project.getBuildListeners().firstElement();
+            logger.setMessageOutputLevel( 0 );
+        </script>
+		<pmd sourceDirectory="${project.src}" 
+             outputDirectory="${project.reports}" />
+
+		<cpd minimumTokenCount="1" 
+             outputFile="${project.reports}/cpd.xml">
+			<fileset dir="${project.src}">
+				<include name="**/*.as" />
+				<include name="**/*.mxml" />
+			</fileset>
+		</cpd>
+    </target>
+	
+</project>

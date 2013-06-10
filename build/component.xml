@@ -40,7 +40,7 @@
     <!-- TASK -->
     <target depends="no_changes"
             name="compile"
-            unless="compiler.not-required">
+            unless="compile.not-required">
         <compc output="${project.lib.swc}" 
         	   target-player="${project.player}">
 

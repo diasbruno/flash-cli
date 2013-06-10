@@ -2,7 +2,8 @@ flash-cli {osx}
 =========
 
 ```
-usage: ./flash-cli -i         initialize the project.
+usage: ./flash-cli -ip        initialize a new project.
+                   -ic        initialize a new component.
                    -d [task]  build debug version (task name is optional).
                    -r [task]  build release version (task name is optional).
                    -c [task]  build component (task name is optional).
@@ -34,10 +35,11 @@ for components
 while you're developing a component for our project, you'll just need
 
 ```
-./flash-cli -i
-./flash-cli -ut  # add flexunit to the libs folder.
+./flash-cli -ic
+./flash-cli -ut        # add flexunit to the libs folder.
 ./flash-cli -c 
-./flash-cli -t 
+./flash-cli -t         # just build.
+./flash-cli -t run     # build and run tests. 
 ```
 
 for projects
@@ -45,7 +47,14 @@ for projects
 
 project, you'll just need
 ```
-./flash-cli -i
-./flash-cli -d
+./flash-cli -ip
+./flash-cli -d         # just build.
+./flash-cli -d run     # build and run.
 ./flash-cli -r
 ```
+
+TODO
+=========
+
+- test on windows and linux (maybe).
+- dependency manager.

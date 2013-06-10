@@ -37,16 +37,22 @@ function run_project {
 
     fdb $SWF
 }
+
+# Finds the command.
+#
 function findCommand {
 	case $1 in
-    	"-ip" ) mkdir -p ./{debug,release,src,libs};
-                exit
+    	"-ip" ) create_project; exit;
         	;;
-    	"-ic" ) mkdir -p ./{src,libs,tests};
-                mkdir -p tests/reports;
-                exit
+    	"-ic" ) create_component; exit;
+        	;;
+        "--run" ) run_project $2; exit;
+        	;;
+    	"-ut" ) install_flexunit; exit
         	;;
     	"-d" ) COMPILE="debug"
+        	;;
+    	"-l" ) COMPILE="lint"
         	;;
     	"-r" ) COMPILE="release"
         	;;
@@ -54,38 +60,41 @@ function findCommand {
         	;;
     	"-t" ) COMPILE="tests"
         	;;
-    	"-ut" ) cp build/ut.zip libs; cd libs; tar -zxf ut.zip; rm ut.zip;
-                exit
-        	;;
-        "-docs" ) open -a "Safari" "http://help.adobe.com/en_US/FlashPlatform/reference/actionscript/3/index.html"
+        "--docs" ) open -a "Safari" "http://help.adobe.com/en_US/FlashPlatform/reference/actionscript/3/index.html"
                  exit
             ;;
     	* ) invalidCommand
 	esac
 }
 
+# Invalid command?
+#
 function invalidCommand {
 	echo "WAT?"
 	usage
 	exit
 }
 
+# Show usage.
+#
 function usage {
-	echo "usage: ./flash-cli -i         initialize the project."
-	echo "                   -d [task]  build debug version (task name is optional)."
-	echo "                   -r [task]  build release version (task name is optional)."
-	echo "                   -c [task]  build component (task name is optional)."
-	echo "                   -t [task]  build and run tests (task name is optional)."
-	echo "                   -docs      open the flash asdocs."
-	echo "                   -ut        gets the build/ut.zip, with flexunit and many others,"
-    echo "                              and put them in the libs folder."
+	echo "usage: ./flash-cli -i              initialize the project."
+	echo "                   -d [task]       build debug version (task name is optional)."
+	echo "                   -r [task]       build release version (task name is optional)."
+	echo "                   -c [task]       build component (task name is optional)."
+	echo "                   -t [task]       build and run tests (task name is optional)."
+    echo ""
+	echo "                   --run [-d|-r]   execute the application."
+	echo "                   --docs          open the flash asdocs."
+	echo "                   --ut            gets the build/ut.zip, with flexunit and many others,"
+    echo "                                   and put them in the libs folder."
 }
 
 if [ $# -gt 0 ]; then
 
 	if [ -n $1 ]; then
 
-		findCommand $1
+		findCommand $@
 		counter=0
 		for T in $*; do
 			counter=$((counter + 1))
@@ -94,14 +103,13 @@ if [ $# -gt 0 ]; then
 			fi
 		done
 
-		echo $TARGETS
-
-		if [ ! $COMPILE = "" ]; then
+		if [ "$COMPILE" != "" ]; then
 			ant -f build/$COMPILE.xml $TARGETS
 		fi
 	fi
 
-else
-    usage
     exit
 fi
+
+usage
+exit

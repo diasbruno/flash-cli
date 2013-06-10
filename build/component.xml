@@ -24,7 +24,7 @@
     <!-- TASK -->
 	<target name="no_changes">
 		<uptodate property="compile.not-required"
-				  targetfile="${bin.loc}/${build.artifact}.swc">
+				  targetfile="${project.lib.swc}">
 			<srcresources>
 				<fileset dir="${project.src}">
 					<include name="**/*.as" />

@@ -3,6 +3,40 @@
 COMPILE=""
 TARGETS=""
 
+# Create a project.
+#
+function create_project {
+    mkdir -p ./{debug,release,src,libs};
+}
+
+# Create a project for component.
+#
+function create_component {
+    mkdir -p ./{bin,src,libs,tests};
+    mkdir -p tests/reports;
+}
+
+# Install tools for auto.testing.
+#
+function install_flexunit {
+    cp build/ut.zip libs 
+    cd libs 
+    tar -zxf ut.zip 
+    rm ut.zip
+}
+
+# Will find and run the swf.
+#
+function run_project {
+    local VERSION
+    local SWF
+    [[ "$1" == "-d" ]] && VERSION="debug"
+    [[ "$1" == "-r" ]] && VERSION="release"
+    [[ "$1" == "" ]] && VERSION="debug"
+    SWF=$(find "$VERSION" -name "*.swf" | grep ".swf$" );    
+
+    fdb $SWF
+}
 function findCommand {
 	case $1 in
     	"-ip" ) mkdir -p ./{debug,release,src,libs};

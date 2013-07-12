@@ -1,7 +1,7 @@
 language: java
 jdk:
     - openjdk6
-script: "./flash-cli -d"
+script: "curl http://www.apache.org/dyn/closer.cgi/flex/4.9.1/binaries/apache-flex-sdk-4.9.1-bin.tar.gz && tar -zxvf apache-flex-sdk-4.9.1-bin.tar.gz && ls && ./flash-cli -d"
 notifications:
   recipients:
     - dias.h.bruno@gmail.com

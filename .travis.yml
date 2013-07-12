@@ -1,8 +1,8 @@
-language: node
+language: node_js
 install: ant 
 jdk:
     - openjdk6
-script: ./flash-cli -d
+script: "./flash-cli -d"
 notifications:
   recipients:
     - dias.h.bruno@gmail.com

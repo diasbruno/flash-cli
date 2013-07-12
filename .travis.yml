@@ -1,7 +1,7 @@
 language: java
 jdk:
     - openjdk6
-script: 'curl http://mirror.nexcess.net/apache/flex/4.9.1/binaries/apache-flex-sdk-4.9.1-bin.tar.gz > flex.tar.gz && tar -zxf flex.tar.gz && export FLEX_HOME=$HOME/apache-flex-sdk-4.9.1-bin export PATH="$PATH:$FLEX_HOME/bin" && ls && ./flash-cli -d'
+script: 'curl http://mirror.nexcess.net/apache/flex/4.9.1/binaries/apache-flex-sdk-4.9.1-bin.tar.gz > flex.tar.gz && tar -zxf flex.tar.gz && export FLEX_HOME=$HOME/apache-flex-sdk-4.9.1-bin && export PATH="$PATH:$FLEX_HOME/bin" && ls && ./flash-cli -d'
 notifications:
   recipients:
     - dias.h.bruno@gmail.com

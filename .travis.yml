@@ -1,5 +1,5 @@
-language: java
-install: ant
+language: node
+install: ant 
 jdk:
     - openjdk6
 script: ./flash-cli -d

@@ -2,7 +2,7 @@ language: java
 install: ant
 jdk:
     - openjdk6
-script: echo "..and the crowd goes wild."
+script: ./flash-cli -d
 notifications:
   recipients:
     - dias.h.bruno@gmail.com
